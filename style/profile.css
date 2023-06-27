@@ -14,12 +14,13 @@
     display: flex;
     align-items: flex-start;
     flex-direction: column;
+    align-items: flex-start;
     padding-bottom: 78px;
 }
 
 .profile__fullname {
-    font-weight: 400;
     font-size: 50px;
+    font-weight: 400;
     margin-bottom: 12px;
 }
 
@@ -30,10 +31,13 @@
 
 .profile__edit {
     display: flex;
-    text-align: left;
     align-items: center;
     font-size: 32px;
-    gap: 7px;
+    text-align: left;
+}
+
+.profile__edit-icon {
+    margin-right: 7px;
 }
 
 @media (max-width: 1200px) {
@@ -51,8 +55,8 @@
         margin-bottom: 12px;
     }
 
-    .profile__edit {
-        gap: 2px;
+    .profile__edit-icon {
+        margin-right: 2px;
     }
 }
 
@@ -70,12 +74,9 @@
         margin-bottom: 24px;
     }
 
-    .profile__edit {
-        gap: 7px;
-    }
-
     .profile__edit-icon {
         width: 30px;
+        margin-right: 7px;
     }
 }
 
@@ -98,7 +99,7 @@
 
     .profile__fullname {
         margin-bottom: 4px;
-        font-size: 36px;
+        font-size: 32px;
     }
 
     .profile__birthday {
@@ -107,11 +108,6 @@
     }
 
     .profile__edit {
-        gap: 6px;
         font-size: 14px;
-    }
-
-    .profile__edit-icon {
-        width: 16px;
     }
 }

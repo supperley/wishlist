@@ -3,8 +3,8 @@ html {
 }
 
 *,
-*::before,
-*::after {
+*::after,
+*::before {
     box-sizing: inherit;
 }
 
@@ -50,6 +50,7 @@ h1,
 h2,
 h3,
 h4,
+h5,
 p {
     margin: 0;
 }
@@ -81,13 +82,13 @@ fieldset {
 .btn {
     padding: 10px 20px;
     background: #ffffff;
+    color: #365aba;
     border-radius: 15px;
     font-size: 34px;
     text-transform: capitalize;
-    color: #365aba;
 }
 
-.btn_castling {
+.btn__castling {
     background: #365aba;
     color: #ffffff;
 }
@@ -127,7 +128,7 @@ fieldset {
         font-size: 20px;
     }
 
-    .btn_castling {
+    .btn__castling {
         font-size: 24px;
     }
 }

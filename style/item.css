@@ -1,12 +1,12 @@
 .item {
-    background: #ffffff;
-    border-radius: 15px;
-    color: #282828;
-    padding: 28px 35px 43px;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 607px;
+    background: #ffffff;
+    border-radius: 15px;
+    color: #282828;
+    padding: 28px 35px 43px;
 }
 
 .item__image {
@@ -33,17 +33,13 @@
     }
 }
 
-@media (max-width: 996px) {
+@media (max-width: 992px) {
     .item {
         padding: 28px 30px 45px;
     }
 
     .item__image {
         margin-bottom: 36px;
-    }
-
-    .item__title {
-        margin-bottom: 6px;
     }
 }
 
