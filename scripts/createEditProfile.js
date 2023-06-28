@@ -4,10 +4,11 @@ import {
     createSelectDate,
     handleImageFileSelection,
 } from './helper.js';
-import { getUser } from './service.js';
+import { router } from './index.js';
+import { getUser, sendDataUser } from './service.js';
 
 export const createEditProfile = async (login) => {
-    const user = await getUser();
+    const user = await getUser(login);
 
     const sectionEditProfile = createElement('section', {
         className: 'edit edit_profile',
@@ -23,8 +24,16 @@ export const createEditProfile = async (login) => {
         className: 'edit__form',
     });
 
-    formProfile.addEventListener('submit', (e) => {
-        // todo
+    formProfile.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData);
+        if (data.day && data.month && data.year) {
+            data.birthdate = `${data.month}/${data.day}/${data.year}`;
+        }
+
+        await sendDataUser(user.id, data);
+        router.setRoute(`/user/${login}`);
     });
 
     const editAvatar = createElement('fieldset', {
@@ -59,7 +68,12 @@ export const createEditProfile = async (login) => {
         accept: 'image/jpeg, image/png',
     });
 
-    handleImageFileSelection(editInputFile, editAvatarImage);
+    const editHiddenInput = createElement('input', {
+        type: 'hidden',
+        name: 'avatar',
+    });
+
+    handleImageFileSelection(editInputFile, editAvatarImage, editHiddenInput);
 
     const editAvatarDelete = createElement('button', {
         className: 'edit__avatar-delete',
@@ -74,10 +88,15 @@ export const createEditProfile = async (login) => {
 
     editAvatarDelete.addEventListener('click', () => {
         editInputFile.value = '';
-        editAvatarImage.src = `img/avatar.png`;
+        editAvatarImage.src = 'img/avatar.png';
     });
 
-    editAvatarLoad.append(editLabelAvatar, editInputFile, editAvatarDelete);
+    editAvatarLoad.append(
+        editLabelAvatar,
+        editInputFile,
+        editHiddenInput,
+        editAvatarDelete
+    );
     editAvatar.append(editAvatarImage, editAvatarLoad);
     container.append(formProfile);
 
@@ -189,6 +208,8 @@ export const createEditProfile = async (login) => {
     const editDescriptionTextarea = createElement('textarea', {
         className: 'edit__description-input',
         id: 'description',
+        name: 'description',
+        value: user.description,
     });
 
     const editSubmitBtn = createElement('button', {
