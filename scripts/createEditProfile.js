@@ -31,7 +31,6 @@ export const createEditProfile = async (login) => {
         if (data.day && data.month && data.year) {
             data.birthdate = `${data.month}/${data.day}/${data.year}`;
         }
-
         await sendDataUser(user.id, data);
         router.setRoute(`/user/${login}`);
     });
@@ -71,6 +70,7 @@ export const createEditProfile = async (login) => {
     const editHiddenInput = createElement('input', {
         type: 'hidden',
         name: 'avatar',
+        value: `${API_URL}/${user.avatar}`,
     });
 
     handleImageFileSelection(editInputFile, editAvatarImage, editHiddenInput);
@@ -89,6 +89,7 @@ export const createEditProfile = async (login) => {
     editAvatarDelete.addEventListener('click', () => {
         editInputFile.value = '';
         editAvatarImage.src = 'img/avatar.png';
+        editHiddenInput.value = '';
     });
 
     editAvatarLoad.append(
@@ -120,7 +121,7 @@ export const createEditProfile = async (login) => {
 
     const editSurnameLabel = createElement('label', {
         className: 'edit__label',
-        innerHTML: '<span class="edit__label-text">Имя:</span>',
+        innerHTML: '<span class="edit__label-text">Фамилия</span>',
     });
 
     const editSurnameInput = createElement('input', {
@@ -209,11 +210,11 @@ export const createEditProfile = async (login) => {
         className: 'edit__description-input',
         id: 'description',
         name: 'description',
-        value: user.description,
+        value: user.description ?? '',
     });
 
     const editSubmitBtn = createElement('button', {
-        className: 'edit__submit btn',
+        className: 'edit__submit-btn btn',
         textContent: 'Сохранить изменения',
         type: 'submit',
     });
